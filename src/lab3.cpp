@@ -28,7 +28,7 @@ int main(int argc, char *argv[]) {
         if (rank == 0) {
             // Процесс с рангом 0 получает данные от всех других процессов
             for (int src_rank = commsize - 1; src_rank > 0; src_rank--) {
-                MPI_Recv(receive_buffer[src_rank], cmessage_size, MPI_CHAR, src_rank, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+                MPI_Recv(receive_buffer[src_rank], message_size, MPI_CHAR, src_rank, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
             }
         } else {
             // Остальные процессы отправляют данные на процесс 0

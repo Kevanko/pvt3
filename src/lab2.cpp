@@ -2,53 +2,33 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int main(int argc, char **argv) {
+int main(int argc, char *argv[]) {
   MPI_Init(&argc, &argv);
-
   int rank, commsize;
-  MPI_Comm_rank(MPI_COMM_WORLD, &rank);
   MPI_Comm_size(MPI_COMM_WORLD, &commsize);
-
-  // Проверка конфигурации
-  if (commsize != 32) {
-    if (rank == 0) {
-      printf("Запуск программы должен быть на 32 процессах.\n");
+  MPI_Comm_rank(MPI_COMM_WORLD, &rank);
+  int n = 1024;
+  for (int i = 0; i <= 1; i++) {
+    char sbuf[n];
+    for (int b = 0; b < n; b++) {
+      sbuf[b] = rand() % 128;
     }
-    MPI_Finalize();
-    return 1;
-  }
-
-  // Размеры сообщений: 1 KB и 1 MB
-  int sizes[] = {1024, 1024 * 1024};
-  char *buffer;
-
-  for (int i = 0; i < 2; ++i) {
-    int message_size = sizes[i];
-    buffer = (char *)malloc(message_size * sizeof(char));
-
-    // Инициализация буфера для процесса 0
+    char rbuf[n];
+    double start_t = MPI_Wtime();
     if (rank == 0) {
-      for (int j = 0; j < message_size; ++j) {
-        buffer[j] = 'a'; // Заполнение буфера
+      for (int j = 1; j < commsize; j++) {
+        MPI_Send(&sbuf, n, MPI_CHAR, j, 0, MPI_COMM_WORLD);
       }
+    } else {
+      MPI_Recv(&rbuf, n, MPI_CHAR, 0, 0, MPI_COMM_WORLD, 0);
     }
+    double end_t = MPI_Wtime();
+    if (rank == 0)
+      printf("Размер сообщения = %d байт, время передачи = %f секунд\n", n,
+             end_t - start_t);
 
-    // Замер времени
-    double start_time = MPI_Wtime();
-
-    // Трансляция сообщения от процесса 0 ко всем остальным процессам
-    MPI_Bcast(buffer, message_size, MPI_CHAR, 0, MPI_COMM_WORLD);
-
-    double end_time = MPI_Wtime();
-
-    if (rank == 0) {
-      printf("Размер сообщения = %d байт, время передачи = %f секунд\n",
-             message_size, end_time - start_time);
-    }
-
-    free(buffer);
+    n *= 1024;
   }
-
   MPI_Finalize();
   return 0;
 }

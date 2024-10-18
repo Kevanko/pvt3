@@ -1,6 +1,6 @@
+#include <mpi.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <mpi.h>
 
 int main(int argc, char *argv[]) {
   MPI_Init(&argc, &argv);
@@ -30,8 +30,9 @@ int main(int argc, char *argv[]) {
       int dest = (rank + 1) % commsize;
       int source = (rank - 1 + commsize) % commsize;
 
-      MPI_Sendrecv(msg, message_size, MPI_CHAR, dest, msg_tag, msg, message_size, MPI_CHAR, source,
-                   MPI_ANY_TAG, MPI_COMM_WORLD, &stat);
+      MPI_Sendrecv(msg, message_size, MPI_CHAR, dest, msg_tag, msg,
+                   message_size, MPI_CHAR, source, MPI_ANY_TAG, MPI_COMM_WORLD,
+                   &stat);
     }
 
     double end_time = MPI_Wtime();

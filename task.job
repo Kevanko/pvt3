@@ -1,7 +1,8 @@
-#!/bin/bash
-#SBATCH --nodes=8 --ntasks-per-node=4       
-#SBATCH --job-name=lab1      
+#!/ bin / bash
+#SBATCH-- nodes = 8 --ntasks - per - node = 4
+#SBATCH-- job - name = lab1
 
 cd $SLURM_SUBMIT_DIR
 
-mpiexec ./lab1       
+        mpiexec./
+    lab1

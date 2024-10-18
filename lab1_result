@@ -1,4 +1,0 @@
-iv222s09@oak:~/folder$ cat slurm-503.out 
-Message size: 1 , Time = 0.025991
-Message size: 1024 , Time = 0.000148
-Message size: 1048576 , Time = 0.006566

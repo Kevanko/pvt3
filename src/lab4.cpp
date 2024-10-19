@@ -22,18 +22,12 @@ int main(int argc, char *argv[]) {
   double start_time = MPI_Wtime();
 
   for (int j = 0; j < commsize; j++) {
-    if (j == rank) {
-      MPI_Isend(send_buffer, message_size, MPI_CHAR, j, 0,
-                MPI_COMM_WORLD, &requests[j]);
-      MPI_Irecv(recv_buffers[j], message_size, MPI_CHAR, j,
-                0, MPI_COMM_WORLD, &requests[j + commsize]);
-    } else {
-      MPI_Isend(send_buffer, message_size, MPI_CHAR, j, 0,
-                MPI_COMM_WORLD, &requests[j]);
-      MPI_Irecv(recv_buffers[j], message_size, MPI_CHAR, j,
-                0, MPI_COMM_WORLD, &requests[j + commsize]);
-    }
+    MPI_Isend(send_buffer, message_size, MPI_CHAR, j, 0,
+              MPI_COMM_WORLD, &requests[j]);
+    MPI_Irecv(recv_buffers[j], message_size, MPI_CHAR, j,
+              0, MPI_COMM_WORLD, &requests[j + commsize]);
   }
+
 
   MPI_Waitall(2 * commsize - 1, requests, statuses);
 

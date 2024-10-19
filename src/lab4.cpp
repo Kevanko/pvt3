@@ -21,7 +21,6 @@ int main(int argc, char *argv[]) {
 
   double start_time = MPI_Wtime();
 
-  // Передача данных между процессами
   for (int j = 0; j < commsize; j++) {
     if (j == rank) {
       MPI_Isend(send_buffer, message_size, MPI_CHAR, j, 0,
@@ -36,7 +35,6 @@ int main(int argc, char *argv[]) {
     }
   }
 
-  // Ожидание завершения всех операций
   MPI_Waitall(2 * commsize - 1, requests, statuses);
 
   double end_time = MPI_Wtime();

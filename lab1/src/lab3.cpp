@@ -13,11 +13,11 @@ int main(int argc, char *argv[]) {
     for (int a = 0; a < n; a++) {
       sbuf[a] = rand() % 128;
     }
-    char rbuf[commsize][n];
+    char *rbuf = (char*)malloc(commsize * n);
     double start_t = MPI_Wtime();
     if (rank == 0) {
       for (int j = 1; j < commsize; j++) {
-        MPI_Recv(&rbuf[j], n, MPI_CHAR, j, 0, MPI_COMM_WORLD, 0);
+        MPI_Recv(&rbuf[j*commsize], n, MPI_CHAR, j, 0, MPI_COMM_WORLD, 0);
       }
     } else {
       MPI_Send(&sbuf, n, MPI_CHAR, 0, 0, MPI_COMM_WORLD);
@@ -25,7 +25,7 @@ int main(int argc, char *argv[]) {
     double end_t = MPI_Wtime();
     if (rank == 0) {
       printf("Размер сообщения = %d байт, время передачи = %f секунд\n", n,
-             end_t - start_t);      
+             end_t - start_t);
     }
     n *= 1024;
   }

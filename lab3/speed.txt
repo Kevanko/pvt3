@@ -28,3 +28,34 @@ Elapsed time (32 procs): 0.316694 sec.
 8.36
 15.82
 27.32
+
+
+n = 28 000
+
+Count proc: 1
+DGEMV: matrix-vector product (c[m] = a[m, n] * b[n]; m = 28000, n = 28000)
+Proc memory used: 2990 MiB
+Memory used: 2990 MiB
+Elapsed time (1 procs): 3.355985 sec.
+
+Count proc: 8
+DGEMV: matrix-vector product (c[m] = a[m, n] * b[n]; m = 28000, n = 28000)
+Proc memory used: 374 MiB
+Memory used: 2992 MiB
+Elapsed time (8 procs): 0.375313 sec.
+
+Count proc: 16
+DGEMV: matrix-vector product (c[m] = a[m, n] * b[n]; m = 28000, n = 28000)
+Proc memory used: 187 MiB
+Memory used: 2994 MiB
+Elapsed time (16 procs): 0.254332 sec.
+
+Count proc: 32
+DGEMV: matrix-vector product (c[m] = a[m, n] * b[n]; m = 28000, n = 28000)
+Proc memory used: 93 MiB
+Memory used: 2997 MiB
+Elapsed time (32 procs): 0.162555 sec.
+
+8.94
+13.19
+20.65

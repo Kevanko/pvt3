@@ -2,8 +2,8 @@
 squeue - проверка очереди
 scancel - отмена
 sbatch - запуск tast.job
-scp 1.c iv222s14@oak.cpct.sibsutis.ru:~/home/pvt/lab1 - загрузка в кластер
-ssh iv222s14@oak.cpct.sibsutis.ru - подключение
+scp 1.c iv222s09@oak.cpct.sibsutis.ru:~/home/pvt/lab1 - загрузка в кластер
+ssh iv222s09@oak.cpct.sibsutis.ru - подключение
 
 
  mpicc -Wall -o hello_mpi 1.c

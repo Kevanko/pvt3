@@ -1,0 +1,30 @@
+. Оценить зависимость коэффициента ускорения параллельной программы от числа p
+процессов
+n = 45 000
+Count proc: 1 
+DGEMV: matrix-vector product (c[m] = a[m, n] * b[n]; m = 45000, n = 45000)
+Proc memory used: 7725 MiB
+Memory used: 7725 MiB
+Elapsed time (1 procs): 8.652129 sec.
+
+Count proc: 8
+DGEMV: matrix-vector product (c[m] = a[m, n] * b[n]; m = 45000, n = 45000)
+Proc memory used: 965 MiB
+Memory used: 7727 MiB
+Elapsed time (8 procs): 1.034909 sec.
+
+Count proc: 16
+DGEMV: matrix-vector product (c[m] = a[m, n] * b[n]; m = 45000, n = 45000)
+Proc memory used: 483 MiB
+Memory used: 7730 MiB
+Elapsed time (16 procs): 0.546857 sec.
+
+Count proc: 32
+DGEMV: matrix-vector product (c[m] = a[m, n] * b[n]; m = 45000, n = 45000)
+Proc memory used: 241 MiB
+Memory used: 7735 MiB
+Elapsed time (32 procs): 0.316694 sec.
+ускорение:
+8.36
+15.82
+27.32
